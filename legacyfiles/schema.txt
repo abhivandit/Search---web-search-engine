@@ -1,0 +1,75 @@
+TENTATIVE TABLE SCHEMA FOR THE WEBSITES ASSIGNMENT
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+master table-
+
+
+url (varchar(100))	primary key;
+domain (varchar(50));
+ip (varchar(100));
+bgcolor (varchar(50));
+metadata TEXT;FULL text ENABLED;
+score INT;
+title TEXT;
+
+
+//TENTATIVELY i have planned to use a basic crawler program implemented in php which will take some websites url's as input and will crawl through the websites extracting url,title,metadata. i am also planning to use the inbuilt "DOM parser" of the php lib files to extract the links from the current websites to other websites.
+
+
+a score will be awarded to each url which will be based on- ( (some factor*no of times the url has popped in the search results)+(some factor* (weightage=score of the website from which it is coming) of links incoming to the file)-(some factor* no of outgoing links));
+
+
+
+linkers table-
+
+
+
+linkedto VARCHAR(100);-foreign key to url column in master table with cascading enabled;
+linkedfrom VARCHAR(100); foreign key to url column in master table with cascading enabled;
+
+
+
+see the code.txt file
+
+
+
+
+topics table-
+
+topic varchar(100);
+url varchar(100);foreign key to master.url with cascading enabled
+
+
+
+searching tables --
+
+
+
+searchwords
+word(varchar 100);
+position (INT);
+
+
+
+
+
+it wil break the user input into separate keywords and will asssign a position to all the keywords with the highest priority to the first two keywords;
+
+
+
+
+
+
+
+schema--
+
+
+
+linkers.linkedto --> master.url
+
+linkers.linkedfrom -->master.url
+
+topics.url -->master.url
+

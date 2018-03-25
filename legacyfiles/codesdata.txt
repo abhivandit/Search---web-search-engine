@@ -1,0 +1,104 @@
+topic 10-websites table schema creation code and explanation
+
+roll-1501056
+
+
+
+
+
+show databases;
+use websites;//websites-our database
+
+//
+
+
+
+//primary tables
+
+
+//creation of master table which will contain our primary key ,metadata and the majority of the attributes.
+//optional a full text indexiung on metadata column i.e each word in a metadata value of a column will be indexed(useful fgor searching);
+
+CREATE TABLE `master`(
+`url` VARCHAR(100) PRIMARY KEY,
+`domain` VARCHAR(50),
+`ip` varchar(100),
+`bgcolr` VARCHAR(50),
+`metadata` TEXT,
+`score` INT,
+`title` TEXT
+);
+//FULLTEXT KEY('metadata','title')
+
+
+//linkers table will contain two filed linkedfrom (the website which is linked),linkedfrom(thje website which links))
+//contains two foreign keys -pointing to the url column of the master table with cascading enabled both at the time of deletion and //updation.two avoid redundant entries.
+
+CREATE TABLE `linkers`(
+`linkedto`   VARCHAR(100),
+`linkedfrom` VARCHAR(100),
+FOREIGN KEY(linkedto) REFERENCES master(url)
+ON DELETE CASCADE 
+ON UPDATE CASCADE,
+FOREIGN KEY(linkedfrom) REFERENCES master(url)
+ON DELETE CASCADE 
+ON UPDATE CASCADE
+
+);
+
+
+
+
+
+
+//as a website can have multiple topics a separate table is needed;
+//again cascading enabled
+
+
+
+CREATE TABLE `topics`(
+`topic` VARCHAR(50),
+`url`  VARCHAR(100),
+
+FOREIGN KEY(url) REFERENCES master(url)
+ON DELETE CASCADE
+ON UPDATE CASCADE
+ 
+);
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+//execution time tables-to make our search easier//optional
+
+
+
+
+// searchwords table -this will break up the random input phrase into separate keywords and accordingly our algo will search with the highest priority to the first two keywords-for example-"blue horror always a"-will be separated and only the keywords i.e blue and horror will be taken
+
+
+
+CREATE TABLE `searchwords`(
+word VARCHAR(100),
+position INT
+);
+
+//our final output table
+
+
+CREATE TABLE `searchresults`(
+`url` VARCHAR(100) ,
+`title` TEXT,
+`metadata`	TEXT,
+`score` INT,
+`linkedto` 	INT,
+`linkedfrom` INT
+);
+
+
+
+
