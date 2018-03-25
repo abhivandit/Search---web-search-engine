@@ -13,6 +13,7 @@ These instructions wil get you a copy of the project up and running on yur local
 4. Ajax
 5. Bootstrap
 6. HTML/CSS
+7. JSS
 
 # Notes
 I will be adding the sql commands for creating and maintaining the database in this repository later. The  project is fully functional with proper database integration enabled.
