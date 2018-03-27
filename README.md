@@ -17,6 +17,6 @@ These instructions wil get you a copy of the project up and running on yur local
 
 # Notes
 I will be adding the sql commands for creating and maintaining the database in this repository later. The  project is fully functional with proper database integration enabled.
-I will  eadding a user guide detailing the flow of the project in times to come. The display of images search result can be refined and all modifications are welcome.
+I will  adding a user guide detailing the flow of the project in times to come. The display of images search result can be refined and all modifications are welcome.
 ## Authors ##
 Abhivandit
